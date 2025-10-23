@@ -1,0 +1,61 @@
+
+<html>
+    <head>
+        <title>Thêm và xóa hàng trong Table</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="Cau16.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    </head>
+    <body style="border:1px solid grey; padding:20px;">
+  	    <h2>Quản lý thông tin user</h2>
+        <form>
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="email" placeholder="Email Address">
+            <input type="text" placeholder="Birthdate" id="datepicker">
+    	    <input type="button" class="add-row" value="Add Row">
+        </form>
+        <table border="1" cellpadding="8" cellspacing="0" width="100%" style="margin-top:15px;">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Birthdate</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <button type="button" class="delete-row" style="margin-top:10px;">Delete Row</button>
+    <script>
+        $(function() {
+            $("#datepicker").datepicker({
+            dateFormat: "mm/dd/yy"
+            });
+            $(".add-row").click(function() {
+                const name = $("#name").val().trim();
+                const email = $("#email").val().trim();
+                const birthdate = $("#datepicker").val().trim();
+                if (name === "" || email === "" || birthdate === "") {
+                alert("Vui lòng nhập đầy đủ thông tin!");
+                return;
+                }
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Email không hợp lệ!");
+                return;
+            }
+            const newRow = "<tr>" + "<td><input type='checkbox' class='select-row'></td>" + "<td>" + name + "</td>" + "<td>" + email + "</td>" + "<td>" + birthdate + "</td>" + "</tr>";
+            $("table tbody").append(newRow);
+            $("#name, #email, #datepicker").val("");
+            });
+            $(".delete-row").click(function() {
+                $("table tbody").find("input.select-row:checked").each(function() {
+                $(this).closest("tr").remove();
+                });
+            });
+        });
+    </script>
+    </body>
+</html>

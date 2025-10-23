@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Slideshow hoa</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="Cau20.css">
+    </head>
+    <body>
+        <h2 style="text-align:center">Slideshow </h2>
+        <div class="slider">
+            <button class="arrow prev">&#10094;</button>
+            <div class="slides">
+                <img src="Images/hoa1.jpg">
+                <img src="Images/hoa2.jpg">
+                <img src="Images/hoa3.jpg">
+                <img src="Images/hoa4.jpg">
+                <img src="Images/hoa5.jpg">
+                <img src="Images/hoa6.jpg">
+                <img src="Images/hoa7.jpg">
+                <img src="Images/hoa8.jpg">
+            </div>
+            <button class="arrow next">&#10095;</button>
+        </div>
+    <script>
+        $(document).ready(function() {
+            const slideWidth = 220;
+            const totalSlides = $(".slides img").length;
+            let currentIndex = 0;
+            function moveSlide(index) {
+                $(".slides").css("transform", `translateX(-${index * slideWidth}px)`);
+            }
+            $(".next").click(function() {
+                currentIndex++;
+                if (currentIndex > totalSlides - 5) currentIndex = 0;
+                moveSlide(currentIndex);
+            });
+            $(".prev").click(function() {
+                currentIndex--;
+                if (currentIndex < 0) currentIndex = totalSlides - 5;
+                moveSlide(currentIndex);
+            });
+            setInterval(function() {
+                currentIndex++;
+                if (currentIndex > totalSlides - 5) currentIndex = 0;
+                moveSlide(currentIndex);
+            }, 3000);
+        });
+    </script>
+    </body>
+</html>
